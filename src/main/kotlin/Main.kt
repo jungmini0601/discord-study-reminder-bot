@@ -4,5 +4,5 @@ fun main(args: Array<String>) {
     val nextStudyDayCalcurator = NextStudyDayCalcurator()
     val studyReminderMessageGenerator = StudyReminderMessageGenerator(nextStudyDayCalcurator)
     val jda = JDABuilder.createDefault(token).build()
-    jda.addEventListener(DiscordReminder(studyReminderMessageGenerator))
+    jda.addEventListener(DiscordReminder(studyReminderMessageGenerator, nextStudyDayCalcurator))
 }

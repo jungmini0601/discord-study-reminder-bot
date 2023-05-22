@@ -1,5 +1,6 @@
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class NextStudyDayCalcurator {
 
@@ -15,6 +16,18 @@ class NextStudyDayCalcurator {
         val daysUntilNextTuesday = (DayOfWeek.TUESDAY.value - currentDayOfWeek + 7) % 7
         val nearestTuesday = base.plusDays(daysUntilNextTuesday.toLong())
         return makeDateString(nearestTuesday)
+    }
+
+    fun generateNearestTuesdayLocalDateTime(base: LocalDateTime): LocalDateTime {
+        val nextTuesday = getNextTuesday(base)
+        return nextTuesday.withHour(12).withMinute(0).withSecond(0)
+    }
+
+    private fun getNextTuesday(date: LocalDateTime): LocalDateTime {
+        val currentDayOfWeek = date.dayOfWeek.value
+        val daysUntilNextTuesday = (DayOfWeek.TUESDAY.value - currentDayOfWeek + 7) % 7
+        val nextTuesday = date.plusDays(daysUntilNextTuesday.toLong())
+        return nextTuesday.withHour(12).withMinute(0).withSecond(0)
     }
 
     private fun makeDateString(localDate: LocalDate): String {
